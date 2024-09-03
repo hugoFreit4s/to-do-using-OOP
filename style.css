@@ -1,0 +1,42 @@
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    display: flex;
+    gap: 20px;
+}
+
+.inputs {
+    width: 200px;
+    font-size: 1.15rem;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #caced1;
+    border-radius: 6px;
+    color: #000;
+}
+
+.inputs select {
+    width: 200px;
+    font-size: 1.15rem;
+    background-color: #fff;
+    border: none;
+    border-radius: 6px;
+    color: #000;
+    cursor: pointer;
+}
+
+.task_style{
+    display: flex;
+    flex-direction: column;
+    width: 120px;
+    gap: 20px;
+}
+
+.task_font{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family: 20px;
+    color: black;
+}

@@ -26,14 +26,16 @@ export default class UI {
         const insideDeleteModalContainerBuilder = new HTMLBuilder('div').addClass('modal_content');
         const deleteConfirmationH1 = new HTMLBuilder('h1').addText('Delete task?').build();
         const deleteConfirmationText = new HTMLBuilder('p').addText("This can't be undone.").build();
+        const hrElement = new HTMLBuilder('hr').build();
+        const deleteModalTexts = new HTMLBuilder('div').addChildren(deleteConfirmationH1, hrElement, deleteConfirmationText).addClass('modal-text').build();
         const cancelDeleteBtn = new HTMLBuilder('button').addText('Cancel').addClass('standard_btn').build();
         const confirmDeleteBtn = new HTMLBuilder('button').addText('Delete').addClass('danger_btn').build();
         confirmDeleteBtn.addEventListener('click', () => {
             db.deleteTaskFromDatabase(task.taskID);
             this.render(db);
         });
-        const deleteModalBtnsContainer = new HTMLBuilder('div').addCss('display: flex; gap: 10px; justify-content: end;').addChildren(cancelDeleteBtn, confirmDeleteBtn).build();
-        const insideDeleteModalContainer = insideDeleteModalContainerBuilder.addChildren(deleteConfirmationH1, deleteConfirmationText, deleteModalBtnsContainer).build();
+        const deleteModalBtnsContainer = new HTMLBuilder('div').addClass('modal_btns').addChildren(cancelDeleteBtn, confirmDeleteBtn).build();
+        const insideDeleteModalContainer = insideDeleteModalContainerBuilder.addChildren(deleteModalTexts, deleteModalBtnsContainer).build();
         const outsideDeleteModalContainer = outsideDeleteModalContainerBuilder.addChildren(insideDeleteModalContainer).build();
         cancelDeleteBtn.addEventListener('click', () => {
             outsideDeleteModalContainer.style.opacity = '0';
@@ -64,8 +66,8 @@ export default class UI {
             task.defineTitle = newTaskNameInp.value;
             this.render(db);
         });
-        const editModalBtnsContainer = new HTMLBuilder('div').addCss('display: flex; gap: 10px; justify-content: end;').addChildren(cancelEditBtn, confirmEditBtn).build();
-        const insideEditModalContainer = insideEditModalContainerBuilder.addChildren(inpContainer, editConfirmationText, editModalBtnsContainer).build();
+        const editModalBtnsContainer = new HTMLBuilder('div').addClass('modal_btns').addChildren(cancelEditBtn, confirmEditBtn).build();
+        const insideEditModalContainer = insideEditModalContainerBuilder.addID('inside-edit-modal').addChildren(inpContainer, editConfirmationText, editModalBtnsContainer).build();
         const outsideEditModalContainer = outsideEditModalContainerBuilder.addChildren(insideEditModalContainer).build();
         /******************************************************* */
 

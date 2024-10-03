@@ -1,19 +1,16 @@
 body {
     margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 }
 
-.inputs-container{
+.inputs-container {
     display: flex;
     align-items: center;
 }
 
-.text-inp {
+.text-inp {}
 
-}
-
-.button {
-    
-}
+.button {}
 
 .modal_backdrop {
     position: fixed;
@@ -27,16 +24,72 @@ body {
     align-items: center;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 1.5s;
+    transition: opacity 0.7s;
 }
 
-.modal_content{
+.modal_content {
     background-color: white;
     border-radius: 7px;
-    padding: 15px 25px 15px 25px;
+    padding: 20px 25px 20px 25px;
     width: 300px;
     height: 150px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 30px;
+}
+
+.modal-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 0;
+    width: 100%;
+    text-align: left;
+}
+
+.standard_btn {
+    padding: 10px 5px 10px 5px;
+    background-color: #95a5a6;
+}
+
+.standard_btn:hover{
+    background-color: #7f8c8d;
+}
+
+.danger_btn{
+    padding: 10px 25px 10px 25px;
+    background-color: #e74c3c;
+}
+
+.danger_btn:hover{
+    background-color:  #c0392b;
+}
+
+button {
+    border-radius: 4px;
+    border: 1px solid rgba(0, 0, 0, 0.320);
+    color: #ffff;
+    cursor: pointer;
+    font-weight: bolder;
+    transition: background-color 0.5s;
+}
+
+hr {
+    width: 100%;
+    border-color: rgba(0, 0, 0, 0.151)
+}
+
+.modal_btns {
+    display: flex;
+    width: 100%;
+    justify-content: end;
+    gap: 20px;
+}
+
+#inside-edit-modal {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    padding: 80px 25px 80px 25px;
 }

@@ -9,15 +9,12 @@ const inputTaskDate = document.getElementById('inp_date') as HTMLInputElement;
 const container = document.getElementById('app_container');
 const db = new TasksDatabase();
 
-const t1 = new Task({title: 'teste 1', category: 'work', maxDate: new Date()})
-const t2 = new Task({title: 'teste 2', category: 'work', maxDate: new Date()})
-
 insertTaskBtn?.addEventListener('click', () => {
     const taskTitle = inputTaskTitle.value;
     const taskCategory = inputTaskCategory.value;
     const taskDate = new Date(inputTaskDate.value);
 
-    const task = new Task({title: taskTitle, category: taskCategory, maxDate: taskDate});
+    const task = new Task({ title: taskTitle, category: taskCategory, maxDate: taskDate });
     db.insertTaskInDatabase(task);
     UI.render(db);
 });

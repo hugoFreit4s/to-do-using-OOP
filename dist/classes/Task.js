@@ -1,50 +1,49 @@
 export default class Task {
-    //Estado | Atributos
     title = "";
     checked;
     category;
     maxDate;
     taskId;
-    constructor(title, category, maxDate) {
+    constructor(task) {
         this.taskId = crypto.randomUUID();
-        this.setTitle(title);
+        this.defineTitle = task.title;
         this.checked = false;
-        this.category = category;
-        this.maxDate = maxDate;
+        this.category = task.category;
+        this.maxDate = task.maxDate;
     }
     createTaskHTMLElement(currentTask) {
         const taskDiv = document.createElement("div");
         const taskP = document.createElement("p");
-        taskP.style.textDecoration = this.getChecked() ? "line-through" : "none";
+        taskP.style.textDecoration = this.getChecked ? "line-through" : "none";
         taskP.innerText = currentTask.title;
         taskDiv.appendChild(taskP);
         return taskDiv;
     }
     //Comportamento | Metodos
-    setTitle(newTitle) {
-        if (newTitle.length > 3) {
+    set defineTitle(newTitle) {
+        if (newTitle.length >= 4) {
             this.title = newTitle;
         }
         else {
             this.title = "SEM TITULO";
         }
     }
-    getTitle() {
+    get taskTitle() {
         return this.title;
     }
-    getCategory() {
+    get taskCategory() {
         return this.category;
     }
-    getMaxDate() {
-        return this.maxDate;
-    }
-    getID() {
+    // getMaxDate() {
+    //     return this.maxDate;
+    // }
+    get taskID() {
         return this.taskId;
     }
-    setChecked(tf) {
+    set isChecked(tf) {
         this.checked = tf;
     }
-    getChecked() {
+    get getChecked() {
         return this.checked;
     }
 }

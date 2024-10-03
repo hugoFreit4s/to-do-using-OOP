@@ -9,19 +9,16 @@
 </head>
 
 <body>
-    <div class="header">
-        <input class="inputs" id="inp" type="text" />
-        <div class="inputs" id="custom-select">
-            <select name="categories" id="select">
-                <option value="work">Work</option>
-                <option value="study">Study</option>
-                <option value="home">Home</option>
-            </select>
-        </div>
-        <button class="inputs" id="btn">Add task</button>
-        <input type="date" name="date" class="inputs" id="inp_date">
+    <div class="inputs-container">
+        <input class="text-inp" id="inp" type="text" />
+        <select name="category" class="category-inp" id="category">
+            <option value="work">Work</option>
+            <option value="study">Study</option>
+        </select>
+        <input type="date" name="date" class="date-inp" id="inp_date">
+        <button class="button" id="btn">Add task</button>
     </div>
-    <main id="app"></main>
+    <main id="app_container"></main>
 
 
     <script src="./dist/index.js" type="module"></script>

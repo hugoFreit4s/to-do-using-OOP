@@ -1,24 +1,22 @@
-import Tasks from "./Tasks.js";
 export default class Task {
-    //Estado | Atributos
     private title: string = "";
     private checked: boolean;
     private category: string;
     private maxDate: Date;
     private taskId: string;
 
-    constructor(title: string, category: string, maxDate: Date) {
+    constructor(task: {title: string, category: string, maxDate: Date}) {
         this.taskId = crypto.randomUUID();
-        this.setTitle(title);
+        this.defineTitle = task.title;
         this.checked = false;
-        this.category = category;
-        this.maxDate = maxDate;
+        this.category = task.category;
+        this.maxDate = task.maxDate;
     }
 
     createTaskHTMLElement(currentTask: Task) {
         const taskDiv = document.createElement("div");
         const taskP = document.createElement("p");
-        taskP.style.textDecoration = this.getChecked() ? "line-through" : "none";
+        taskP.style.textDecoration = this.getChecked ? "line-through" : "none";
         taskP.innerText = currentTask.title;
 
         taskDiv.appendChild(taskP);
@@ -26,35 +24,35 @@ export default class Task {
     }
 
     //Comportamento | Metodos
-    setTitle(newTitle: string) {
-        if (newTitle.length > 3) {
+    set defineTitle(newTitle: string) {
+        if (newTitle.length >= 4) {
             this.title = newTitle;
         } else {
             this.title = "SEM TITULO"
         }
     }
 
-    getTitle() {
+    get taskTitle() {
         return this.title;
     }
 
-    getCategory() {
+    get taskCategory() {
         return this.category;
     }
 
-    getMaxDate() {
-        return this.maxDate;
-    }
+    // getMaxDate() {
+    //     return this.maxDate;
+    // }
 
-    getID() {
+    get taskID() {
         return this.taskId;
     }
 
-    setChecked(tf: boolean) {
+    set isChecked(tf: boolean) {
         this.checked = tf;
     }
 
-    getChecked() {
+    get getChecked() {
         return this.checked;
     }
 }

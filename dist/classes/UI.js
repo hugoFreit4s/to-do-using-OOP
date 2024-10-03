@@ -43,7 +43,9 @@ export default class UI {
         /**Edit modal ******************************************/
         const outsideEditModalContainerBuilder = new HTMLBuilder('div').addClass('modal_backdrop');
         const insideEditModalContainerBuilder = new HTMLBuilder('div').addClass('modal_content');
-        const editConfirmationH1 = new HTMLBuilder('h1').addText('Edit task?').build();
+        const inputH1 = new HTMLBuilder('h1').addText('Insert the new task name:').build();
+        const newTaskNameInp = new HTMLBuilder('input').build();
+        const inpContainer = new HTMLBuilder('div').addChildren(inputH1, newTaskNameInp).build();
         const editConfirmationText = new HTMLBuilder('p').addText("This can't be undone.").build();
         const cancelEditBtn = new HTMLBuilder('button').addText('Cancel').addClass('standard_btn').build();
         cancelEditBtn.addEventListener('click', () => {
@@ -52,10 +54,11 @@ export default class UI {
         });
         const confirmEditBtn = new HTMLBuilder('button').addText('Edit').addClass('danger_btn').build();
         confirmEditBtn.addEventListener('click', () => {
-            console.log('ok');
+            task.defineTitle = newTaskNameInp.value;
+            this.render(db);
         });
         const editModalBtnsContainer = new HTMLBuilder('div').addCss('display: flex; gap: 10px; justify-content: end;').addChildren(cancelEditBtn, confirmEditBtn).build();
-        const insideEditModalContainer = insideEditModalContainerBuilder.addChildren(editConfirmationH1, editConfirmationText, editModalBtnsContainer).build();
+        const insideEditModalContainer = insideEditModalContainerBuilder.addChildren(inpContainer, editConfirmationText, editModalBtnsContainer).build();
         const outsideEditModalContainer = outsideEditModalContainerBuilder.addChildren(insideEditModalContainer).build();
         /******************************************************* */
         const btnsContainer = new HTMLBuilder('div').addChildren(delTaskBtn, editTaskBtn).build();

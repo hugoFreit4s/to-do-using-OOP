@@ -17,24 +17,57 @@ export default class UI {
         const taskCategory = new HTMLBuilder('div').addText(task.taskCategory).addClass('category_badge').build();
         const delTaskBtn = new HTMLBuilder('button').addText('Delete task').addClass('task-btn').build();
         delTaskBtn.addEventListener('click', () => {
-            const outsideModalContainerBuilder = new HTMLBuilder('div').addClass('modal_backdrop');
-            const insideModalContainerBuilder = new HTMLBuilder('div').addClass('modal_content');
-            const confirmationH1 = new HTMLBuilder('h1').addText('Delete task?').build();
-            const confirmationText = new HTMLBuilder('p').addText("This can't be undone.").build();
-            const cancelBtn = new HTMLBuilder('button').addText('Cancel').addClass('standard_btn').build();
-            const confirmBtn = new HTMLBuilder('button').addText('Delete').addClass('danger_btn').build();
-            confirmBtn.addEventListener('click', () => {
-                db.deleteTaskFromDatabase(task.taskID);
-                this.render(db);
-            });
-            const modalBtnsContainer = new HTMLBuilder('div').addCss('display: flex; gap: 10px; justify-content: end;').addChildren(cancelBtn, confirmBtn).build();
-            const insideModalContainer = insideModalContainerBuilder.addChildren(confirmationH1, confirmationText, modalBtnsContainer).build();
-            const outsideModalContainer = outsideModalContainerBuilder.addChildren(insideModalContainer).build();
-            taskContainer.appendChild(outsideModalContainer);
+            outsideDeleteModalContainer.style.opacity = '1';
+            outsideDeleteModalContainer.style.pointerEvents = 'initial';
         });
+
+        /**Delete modal ******************************************/
+        const outsideDeleteModalContainerBuilder = new HTMLBuilder('div').addClass('modal_backdrop');
+        const insideDeleteModalContainerBuilder = new HTMLBuilder('div').addClass('modal_content');
+        const deleteConfirmationH1 = new HTMLBuilder('h1').addText('Delete task?').build();
+        const deleteConfirmationText = new HTMLBuilder('p').addText("This can't be undone.").build();
+        const cancelDeleteBtn = new HTMLBuilder('button').addText('Cancel').addClass('standard_btn').build();
+        const confirmDeleteBtn = new HTMLBuilder('button').addText('Delete').addClass('danger_btn').build();
+        confirmDeleteBtn.addEventListener('click', () => {
+            db.deleteTaskFromDatabase(task.taskID);
+            this.render(db);
+        });
+        const deleteModalBtnsContainer = new HTMLBuilder('div').addCss('display: flex; gap: 10px; justify-content: end;').addChildren(cancelDeleteBtn, confirmDeleteBtn).build();
+        const insideDeleteModalContainer = insideDeleteModalContainerBuilder.addChildren(deleteConfirmationH1, deleteConfirmationText, deleteModalBtnsContainer).build();
+        const outsideDeleteModalContainer = outsideDeleteModalContainerBuilder.addChildren(insideDeleteModalContainer).build();
+        cancelDeleteBtn.addEventListener('click', () => {
+            outsideDeleteModalContainer.style.opacity = '0';
+            outsideDeleteModalContainer.style.pointerEvents = 'none';
+        });
+        /******************************************************* */
+
         const editTaskBtn = new HTMLBuilder('button').addText('Edit task').addClass('task-btn').build();
+        editTaskBtn.addEventListener('click', () => {
+            outsideEditModalContainer.style.opacity = '1';
+            outsideEditModalContainer.style.pointerEvents = 'initial';
+        });
+
+        /**Edit modal ******************************************/
+        const outsideEditModalContainerBuilder = new HTMLBuilder('div').addClass('modal_backdrop');
+        const insideEditModalContainerBuilder = new HTMLBuilder('div').addClass('modal_content');
+        const editConfirmationH1 = new HTMLBuilder('h1').addText('Edit task?').build();
+        const editConfirmationText = new HTMLBuilder('p').addText("This can't be undone.").build();
+        const cancelEditBtn = new HTMLBuilder('button').addText('Cancel').addClass('standard_btn').build();
+        cancelEditBtn.addEventListener('click', () => {
+            outsideEditModalContainer.style.opacity = '0';
+            outsideEditModalContainer.style.pointerEvents = 'none';
+        });
+        const confirmEditBtn = new HTMLBuilder('button').addText('Edit').addClass('danger_btn').build();
+        confirmEditBtn.addEventListener('click', () => {
+            console.log('ok')
+        });
+        const editModalBtnsContainer = new HTMLBuilder('div').addCss('display: flex; gap: 10px; justify-content: end;').addChildren(cancelEditBtn, confirmEditBtn).build();
+        const insideEditModalContainer = insideEditModalContainerBuilder.addChildren(editConfirmationH1, editConfirmationText, editModalBtnsContainer).build();
+        const outsideEditModalContainer = outsideEditModalContainerBuilder.addChildren(insideEditModalContainer).build();
+        /******************************************************* */
+
         const btnsContainer = new HTMLBuilder('div').addChildren(delTaskBtn, editTaskBtn).build();
-        const taskContainer = taskContainerBuilder.addChildren(taskTitle, taskCategory, btnsContainer).build();
+        const taskContainer = taskContainerBuilder.addChildren(taskTitle, taskCategory, btnsContainer, outsideDeleteModalContainer, outsideEditModalContainer).build();
         container?.appendChild(taskContainer);
     }
 }

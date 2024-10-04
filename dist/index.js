@@ -9,6 +9,8 @@ const inputTaskDescription = document.getElementById('description_inp');
 const inputTaskCategory = document.getElementById('category');
 const inputTaskDate = document.getElementById('inp_date');
 const db = new TasksDatabase();
+db.insertTaskInDatabase(new Task({ title: 'Task teste', category: 'work', maxDate: new Date(), taskDesc: 'Task description' }));
+UI.render(db);
 const inputModalBackdrop = document.getElementById('inputs_modal_backdrop');
 const inputModalContent = document.getElementById('inputs_modal_content');
 newTaskBtn?.addEventListener('click', () => {

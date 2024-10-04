@@ -69,4 +69,12 @@ export default class Task {
     set defineDescription(description: string) {
         this.description = description !== undefined && description.length > 0 ? description : "No description";
     }
+
+    set defineCheckedStatus(status: boolean) {
+        this.checked = status;
+    }
+
+    get isTaskChecked(): boolean {
+        return this.checked;
+    }
 }

@@ -1,4 +1,4 @@
-.top_container_task{
+.top_container_task {
     display: flex;
     flex-direction: column;
     text-align: left;
@@ -6,30 +6,32 @@
     padding: 10px 10px 10px 10px;
 }
 
-.title_and_dots{
+.title_and_dots {
     display: flex;
-    align-items: center;
+    align-items: baseline;
     justify-content: space-between;
 }
 
-.del_popup{
+.del_popup {
     font-weight: bolder;
-    height: 50px;
+    position: relative;
+    height: 40px;
     cursor: pointer;
-    width: 15px;
+    user-select: none;
+}
+
+.menu {
+    display: flex;
+    margin-top: 20px;
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .icon {
-    opacity: 0;
-    pointer-events: none;
     color: red;
-    z-index: 1;
-    font-size: 13px;
-    width: 55px;
-    height: 15px;
-    display: flex;
-    align-items: center;
-    margin-top: 10px;
 }
 
 body {
@@ -48,7 +50,7 @@ body {
 
 .task_container {
     width: fit-content;
-    max-width: 150px;
+    max-width: 100px;
     overflow: hidden;
     padding: 30px 30px 30px 30px;
     border-radius: 3px;
@@ -57,6 +59,7 @@ body {
 }
 
 .title {
+    max-width: 100px;
     font-weight: bold;
 }
 

@@ -11,22 +11,21 @@ export default class UI {
         const taskContainerBuilder = new HTMLBuilder('div').addClass('task_container');
         const taskTitle = new HTMLBuilder('p').addText(task.taskTitle).addClass('title').build();
         const taskDescription = new HTMLBuilder('p').addText(task.taskDescription).addClass('description').build();
-        const delIcon = new HTMLBuilder('div').addText('Del Task').addClass('icon').build();
+        const delIcon = new HTMLBuilder('div').addText('D').addClass('icon').build();
         delIcon.addEventListener('click', () => {
             outsideDeleteModalContainer.style.opacity = '1';
             outsideDeleteModalContainer.style.pointerEvents = 'initial';
         });
-        const editIcon = new HTMLBuilder('div').addText('Edit Task').addClass('icon').build();
+        const editIcon = new HTMLBuilder('div').addText('E').addClass('icon').build();
         editIcon.addEventListener('click', () => {
             outsideEditModalContainer.style.opacity = '1';
             outsideEditModalContainer.style.pointerEvents = 'initial';
         });
-        const threeDots = new HTMLBuilder('div').addClass('del_popup').addText('...').addChildren(delIcon, editIcon).build();
+        const menu = new HTMLBuilder('div').addClass('menu').addChildren(delIcon, editIcon).build();
+        const threeDots = new HTMLBuilder('div').addClass('del_popup').addText('...').addChildren(menu).build();
         threeDots.addEventListener('click', () => {
-            delIcon.style.opacity = delIcon.style.opacity == '1' ? '0' : '1';
-            delIcon.style.pointerEvents = delIcon.style.pointerEvents == 'initial' ? 'none' : 'initial';
-            editIcon.style.opacity = editIcon.style.opacity == '1' ? '0' : '1';
-            editIcon.style.pointerEvents = editIcon.style.pointerEvents == 'initial' ? 'none' : 'initial';
+            menu.style.opacity = menu.style.opacity == '1' ? '0' : '1';
+            menu.style.pointerEvents = menu.style.pointerEvents == 'initial' ? 'none' : 'initial';
         });
         const titleAndDotsContainer = new HTMLBuilder('div').addChildren(taskTitle, threeDots).addClass('title_and_dots').build();
         const topContainerTask = new HTMLBuilder('div').addChildren(titleAndDotsContainer, taskDescription).addClass('top_container_task').build();

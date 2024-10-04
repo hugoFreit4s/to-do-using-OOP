@@ -9,79 +9,16 @@ export default class UI {
     }
     static createTaskElement(task, db) {
         const taskContainerBuilder = new HTMLBuilder('div').addClass('task_container');
-        const taskTitle = new HTMLBuilder('p').addText(task.taskTitle).addClass('title').build();
-        const taskDescription = new HTMLBuilder('p').addText(task.taskDescription).addClass('description').build();
-        const delIcon = new HTMLBuilder('div').addText('D').addClass('icon').build();
-        delIcon.addEventListener('click', () => {
-            outsideDeleteModalContainer.style.opacity = '1';
-            outsideDeleteModalContainer.style.pointerEvents = 'initial';
-        });
-        const editIcon = new HTMLBuilder('div').addText('E').addClass('icon').build();
-        editIcon.addEventListener('click', () => {
-            outsideEditModalContainer.style.opacity = '1';
-            outsideEditModalContainer.style.pointerEvents = 'initial';
-        });
-        const menu = new HTMLBuilder('div').addClass('menu').addChildren(delIcon, editIcon).build();
-        const threeDots = new HTMLBuilder('div').addClass('del_popup').addText('...').addChildren(menu).build();
-        threeDots.addEventListener('click', () => {
-            menu.style.opacity = menu.style.opacity == '1' ? '0' : '1';
-            menu.style.pointerEvents = menu.style.pointerEvents == 'initial' ? 'none' : 'initial';
-        });
-        const titleAndDotsContainer = new HTMLBuilder('div').addChildren(taskTitle, threeDots).addClass('title_and_dots').build();
-        const topContainerTask = new HTMLBuilder('div').addChildren(titleAndDotsContainer, taskDescription).addClass('top_container_task').build();
-        const taskCategory = new HTMLBuilder('div').addText(task.taskCategory).build();
-        const taskCategoryContainer = new HTMLBuilder('div').addChildren(taskCategory).addClass('category_badge').build();
-        const delTaskBtn = new HTMLBuilder('button').addText('Delete task').addClass('task-btn').build();
-        delTaskBtn.addEventListener('click', () => {
-        });
-        /**Delete modal ******************************************/
-        const outsideDeleteModalContainerBuilder = new HTMLBuilder('div').addClass('modal_backdrop');
-        const insideDeleteModalContainerBuilder = new HTMLBuilder('div').addClass('modal_content');
-        const deleteConfirmationH1 = new HTMLBuilder('h1').addText('Delete task?').build();
-        const deleteConfirmationText = new HTMLBuilder('p').addText("This can't be undone.").build();
-        const hrElement = new HTMLBuilder('hr').build();
-        const deleteModalTexts = new HTMLBuilder('div').addChildren(deleteConfirmationH1, hrElement, deleteConfirmationText).addClass('modal-text').build();
-        const cancelDeleteBtn = new HTMLBuilder('button').addText('Cancel').addClass('standard_btn').build();
-        const confirmDeleteBtn = new HTMLBuilder('button').addText('Delete').addClass('danger_btn').build();
-        confirmDeleteBtn.addEventListener('click', () => {
-            db.deleteTaskFromDatabase(task.taskID);
-            this.render(db);
-        });
-        const deleteModalBtnsContainer = new HTMLBuilder('div').addClass('modal_btns').addChildren(cancelDeleteBtn, confirmDeleteBtn).build();
-        const insideDeleteModalContainer = insideDeleteModalContainerBuilder.addChildren(deleteModalTexts, deleteModalBtnsContainer).build();
-        const outsideDeleteModalContainer = outsideDeleteModalContainerBuilder.addChildren(insideDeleteModalContainer).build();
-        cancelDeleteBtn.addEventListener('click', () => {
-            outsideDeleteModalContainer.style.opacity = '0';
-            outsideDeleteModalContainer.style.pointerEvents = 'none';
-        });
-        /******************************************************* */
-        const editTaskBtn = new HTMLBuilder('button').addText('Edit task').addClass('task-btn').build();
-        editTaskBtn.addEventListener('click', () => {
-            outsideEditModalContainer.style.opacity = '1';
-            outsideEditModalContainer.style.pointerEvents = 'initial';
-        });
-        /**Edit modal ******************************************/
-        const outsideEditModalContainerBuilder = new HTMLBuilder('div').addClass('modal_backdrop');
-        const insideEditModalContainerBuilder = new HTMLBuilder('div').addClass('modal_content');
-        const inputH1 = new HTMLBuilder('h1').addText('Insert the new task name:').addCss('text-align: left;').build();
-        const newTaskNameInp = new HTMLBuilder('input').build();
-        const inpContainer = new HTMLBuilder('div').addCss('text-align: left;').addChildren(inputH1, newTaskNameInp).build();
-        const cancelEditBtn = new HTMLBuilder('button').addText('Cancel').addClass('standard_btn').build();
-        cancelEditBtn.addEventListener('click', () => {
-            outsideEditModalContainer.style.opacity = '0';
-            outsideEditModalContainer.style.pointerEvents = 'none';
-        });
-        const confirmEditBtn = new HTMLBuilder('button').addText('Edit').addClass('danger_btn').build();
-        confirmEditBtn.addEventListener('click', () => {
-            task.defineTitle = newTaskNameInp.value;
-            this.render(db);
-        });
-        const editModalBtnsContainer = new HTMLBuilder('div').addClass('modal_btns').addChildren(cancelEditBtn, confirmEditBtn).build();
-        const insideEditModalContainer = insideEditModalContainerBuilder.addID('inside-edit-modal').addChildren(inpContainer, editModalBtnsContainer).build();
-        const outsideEditModalContainer = outsideEditModalContainerBuilder.addChildren(insideEditModalContainer).build();
-        /******************************************************* */
-        const btnsContainer = new HTMLBuilder('div').addChildren(delTaskBtn, editTaskBtn).build();
-        const taskContainer = taskContainerBuilder.addChildren(topContainerTask, taskCategoryContainer, outsideDeleteModalContainer, outsideEditModalContainer).build();
+        const taskTitleElement = new HTMLBuilder('p').addText(task.taskTitle).addClass('primary-text').build();
+        const menuContainer = new HTMLBuilder('div').addText('...').addClass('crud_menu').build();
+        const optionsContainer = new HTMLBuilder('div').addClass('menu_options').build();
+        const deleteBtn = new HTMLBuilder('div').addText('Del task').build();
+        const editBtn = new HTMLBuilder('div').addText('Edit text').build();
+        optionsContainer.appendChild(editBtn);
+        optionsContainer.appendChild(deleteBtn);
+        menuContainer.appendChild(optionsContainer);
+        const topContainer = new HTMLBuilder('div').addChildren(taskTitleElement, menuContainer).addClass('top_container').build();
+        const taskContainer = taskContainerBuilder.addChildren(topContainer).build();
         container?.appendChild(taskContainer);
     }
 }

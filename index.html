@@ -4,20 +4,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
 
 <body>
     <div class="inputs-container">
-        <input class="text-inp" id="inp" type="text" placeholder="Insert task name..." />
-        <input class="text-inp" id="description_inp" type="text" placeholder="Insert task description..." />
-        <select name="category" class="category-inp" id="category">
-            <option value="work">Work</option>
-            <option value="study">Study</option>
-        </select>
-        <input type="date" name="date" class="date-inp" id="inp_date">
-        <button class="button" id="btn">Add task</button>
+        <button class="standard_btn" id="new_task_btn">New task +</button>
+        <div class="modal_backdrop" id="inputs_modal_backdrop">
+            <div class="modal_content" id="inputs_modal_content">
+                <input class="text-inp" id="inp" type="text" placeholder="Insert task name..." />
+                <input class="text-inp" id="description_inp" type="text" placeholder="Insert task description..." />
+                <select name="category" class="category-inp" id="category">
+                    <option value="work">Work</option>
+                    <option value="study">Study</option>
+                </select>
+                <input type="date" name="date" class="date-inp" id="inp_date">
+                <div style="display: flex; gap: 20px; width: 100%; justify-content: center; margin-top: 20px;">
+                    <button class="danger_btn" id="cancel_btn">Cancel</button>
+                    <button class="standard_btn" id="add_btn">Add task</button>
+                </div>
+            </div>
+        </div>
     </div>
     <main id="app_container"></main>
 

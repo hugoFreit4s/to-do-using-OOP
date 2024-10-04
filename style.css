@@ -5,7 +5,7 @@ body {
 #app_container {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    row-gap: 20px;
+    gap: 20px;
     padding: 40px 10px 40px 10px;
 }
 
@@ -55,10 +55,23 @@ body {
     width: 60px;
 }
 
-.checkbox_container{
+.checkbox_container {
     display: flex;
     align-items: center;
     gap: 10px;
+}
+
+.category_container {
+    display: flex;
+    padding: 15px 0 20px 0;
+}
+
+.category_text {
+    height: fit-content;
+    background-color: #290916;
+    color: white;
+    padding: 3px 5px 3px 5px;
+    border-radius: 3px;
 }
 
 #inputs_modal_content {
@@ -137,7 +150,7 @@ body {
 button {
     border-radius: 4px;
     border: 1px solid rgba(0, 0, 0, 0.320);
-    color: #ffff;
+    color: white;
     cursor: pointer;
     font-weight: bolder;
     transition: background-color 0.5s;

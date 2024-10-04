@@ -28,8 +28,8 @@ export default class UI {
         optionsContainer.appendChild(editBtn);
         optionsContainer.appendChild(deleteBtn);
         menuBtn.appendChild(optionsContainer);
-        const categoryElement = new HTMLBuilder('div').addText(task.taskCategory).build();
-        const categoryContainer = new HTMLBuilder('div').addClass('category-container').addChildren(categoryElement).build();
+        const categoryElement = new HTMLBuilder('div').addClass('category_text').addText(task.taskCategory).build();
+        const categoryContainer = new HTMLBuilder('div').addClass('category_container').addChildren(categoryElement).build();
         const hrElement = new HTMLBuilder('hr').addCss('width: 90%;').build();
         const checkTextElement = new HTMLBuilder('p').addText('Check task').build();
         const checkboxElement = new HTMLBuilder('input').build() as HTMLInputElement;

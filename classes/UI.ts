@@ -13,12 +13,31 @@ export default class UI {
 
     static createTaskElement(task: Task, db: TasksDatabase) {
         const taskContainerBuilder = new HTMLBuilder('div').addClass('task_container');
-        const taskTitle = new HTMLBuilder('p').addText(task.taskTitle).build();
-        const taskCategory = new HTMLBuilder('div').addText(task.taskCategory).addClass('category_badge').build();
-        const delTaskBtn = new HTMLBuilder('button').addText('Delete task').addClass('task-btn').build();
-        delTaskBtn.addEventListener('click', () => {
+        const taskTitle = new HTMLBuilder('p').addText(task.taskTitle).addClass('title').build();
+        const taskDescription = new HTMLBuilder('p').addText(task.taskDescription).addClass('description').build();
+        const delIcon = new HTMLBuilder('div').addText('Del Task').addClass('icon').build();
+        delIcon.addEventListener('click', () => {
             outsideDeleteModalContainer.style.opacity = '1';
             outsideDeleteModalContainer.style.pointerEvents = 'initial';
+        });
+        const editIcon = new HTMLBuilder('div').addText('Edit Task').addClass('icon').build();
+        editIcon.addEventListener('click', () => {
+            outsideEditModalContainer.style.opacity = '1';
+            outsideEditModalContainer.style.pointerEvents = 'initial';
+        });
+        const threeDots = new HTMLBuilder('div').addClass('del_popup').addText('...').addChildren(delIcon, editIcon).build();
+        threeDots.addEventListener('click', () => {
+            delIcon.style.opacity = delIcon.style.opacity == '1' ? '0' : '1';
+            delIcon.style.pointerEvents = delIcon.style.pointerEvents == 'initial' ? 'none' : 'initial';
+            editIcon.style.opacity = editIcon.style.opacity == '1' ? '0' : '1';
+            editIcon.style.pointerEvents = editIcon.style.pointerEvents == 'initial' ? 'none' : 'initial';
+        });
+        const titleAndDotsContainer = new HTMLBuilder('div').addChildren(taskTitle, threeDots).addClass('title_and_dots').build();
+        const topContainerTask = new HTMLBuilder('div').addChildren(titleAndDotsContainer, taskDescription).addClass('top_container_task').build();
+        const taskCategory = new HTMLBuilder('div').addText(task.taskCategory).build();
+        const taskCategoryContainer = new HTMLBuilder('div').addChildren(taskCategory).addClass('category_badge').build();
+        const delTaskBtn = new HTMLBuilder('button').addText('Delete task').addClass('task-btn').build();
+        delTaskBtn.addEventListener('click', () => {
         });
 
         /**Delete modal ******************************************/
@@ -52,10 +71,9 @@ export default class UI {
         /**Edit modal ******************************************/
         const outsideEditModalContainerBuilder = new HTMLBuilder('div').addClass('modal_backdrop');
         const insideEditModalContainerBuilder = new HTMLBuilder('div').addClass('modal_content');
-        const inputH1 = new HTMLBuilder('h1').addText('Insert the new task name:').build();
+        const inputH1 = new HTMLBuilder('h1').addText('Insert the new task name:').addCss('text-align: left;').build();
         const newTaskNameInp = new HTMLBuilder('input').build() as HTMLInputElement;
-        const inpContainer = new HTMLBuilder('div').addChildren(inputH1, newTaskNameInp).build();
-        const editConfirmationText = new HTMLBuilder('p').addText("This can't be undone.").build();
+        const inpContainer = new HTMLBuilder('div').addCss('text-align: left;').addChildren(inputH1, newTaskNameInp).build();
         const cancelEditBtn = new HTMLBuilder('button').addText('Cancel').addClass('standard_btn').build();
         cancelEditBtn.addEventListener('click', () => {
             outsideEditModalContainer.style.opacity = '0';
@@ -67,12 +85,12 @@ export default class UI {
             this.render(db);
         });
         const editModalBtnsContainer = new HTMLBuilder('div').addClass('modal_btns').addChildren(cancelEditBtn, confirmEditBtn).build();
-        const insideEditModalContainer = insideEditModalContainerBuilder.addID('inside-edit-modal').addChildren(inpContainer, editConfirmationText, editModalBtnsContainer).build();
+        const insideEditModalContainer = insideEditModalContainerBuilder.addID('inside-edit-modal').addChildren(inpContainer, editModalBtnsContainer).build();
         const outsideEditModalContainer = outsideEditModalContainerBuilder.addChildren(insideEditModalContainer).build();
         /******************************************************* */
 
         const btnsContainer = new HTMLBuilder('div').addChildren(delTaskBtn, editTaskBtn).build();
-        const taskContainer = taskContainerBuilder.addChildren(taskTitle, taskCategory, btnsContainer, outsideDeleteModalContainer, outsideEditModalContainer).build();
+        const taskContainer = taskContainerBuilder.addChildren(topContainerTask, taskCategoryContainer, outsideDeleteModalContainer, outsideEditModalContainer).build();
         container?.appendChild(taskContainer);
     }
 }

@@ -4,12 +4,14 @@ export default class Task {
     category;
     maxDate;
     taskId;
+    description;
     constructor(task) {
         this.taskId = crypto.randomUUID();
         this.defineTitle = task.title;
         this.checked = false;
         this.category = task.category;
         this.maxDate = task.maxDate;
+        this.defineDescription = task.taskDesc;
     }
     createTaskHTMLElement(currentTask) {
         const taskDiv = document.createElement("div");
@@ -25,7 +27,7 @@ export default class Task {
             this.title = newTitle;
         }
         else {
-            this.title = "SEM TITULO";
+            this.title = "No title";
         }
     }
     get taskTitle() {
@@ -34,9 +36,9 @@ export default class Task {
     get taskCategory() {
         return this.category;
     }
-    // getMaxDate() {
-    //     return this.maxDate;
-    // }
+    get taskMaxDate() {
+        return this.maxDate;
+    }
     get taskID() {
         return this.taskId;
     }
@@ -45,5 +47,16 @@ export default class Task {
     }
     get getChecked() {
         return this.checked;
+    }
+    get taskDescription() {
+        if (this.description !== undefined && this.description.trim().length > 0) {
+            return this.description;
+        }
+        else {
+            return "No description";
+        }
+    }
+    set defineDescription(description) {
+        this.description = description !== undefined && description.length > 0 ? description : "No description";
     }
 }

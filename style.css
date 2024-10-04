@@ -1,3 +1,37 @@
+.top_container_task{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    line-height: 0;
+    padding: 10px 10px 10px 10px;
+}
+
+.title_and_dots{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.del_popup{
+    font-weight: bolder;
+    height: 50px;
+    cursor: pointer;
+    width: 15px;
+}
+
+.icon {
+    opacity: 0;
+    pointer-events: none;
+    color: red;
+    z-index: 1;
+    font-size: 13px;
+    width: 55px;
+    height: 15px;
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
 body {
     margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
@@ -12,11 +46,32 @@ body {
 
 .button {}
 
+.task_container {
+    width: fit-content;
+    max-width: 150px;
+    overflow: hidden;
+    padding: 30px 30px 30px 30px;
+    border-radius: 3px;
+    border: 1px solid rgba(152, 152, 152, 0.25);
+    box-shadow: 1px 1px 200px rgb(191, 191, 191);
+}
+
+.title {
+    font-weight: bold;
+}
+
+.description {
+    font-weight: lighter;
+    color: rgba(128, 128, 128, 0.696);
+    font-size: 14px;
+}
+
 .modal_backdrop {
     position: fixed;
     height: 100%;
     width: 100%;
     top: 0;
+    left: 0;
     background-color: rgba(0, 0, 0, 0.220);
     backdrop-filter: blur(1px);
     display: flex;
@@ -52,17 +107,17 @@ body {
     background-color: #95a5a6;
 }
 
-.standard_btn:hover{
+.standard_btn:hover {
     background-color: #7f8c8d;
 }
 
-.danger_btn{
+.danger_btn {
     padding: 10px 25px 10px 25px;
     background-color: #e74c3c;
 }
 
-.danger_btn:hover{
-    background-color:  #c0392b;
+.danger_btn:hover {
+    background-color: #c0392b;
 }
 
 button {
@@ -93,3 +148,5 @@ hr {
     justify-content: center;
     padding: 80px 25px 80px 25px;
 }
+
+.category_badge {}
